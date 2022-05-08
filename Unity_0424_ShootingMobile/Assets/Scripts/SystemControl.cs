@@ -21,13 +21,17 @@ namespace Z1HY4N9
 		private float rangeDirectionIcon = 2.5f;
 		[SerializeField, Header("角色旋轉速度"), Range(0, 100)]
 		private float speedTurn = 1.5f;
+		[SerializeField, Header("動畫參數跑步")]
+		private string parameterwalk = "開關跑步";
 
 
 		private Rigidbody rig;
+		private Animator ani;
 
 		private void Awake()
 		{
-			rig = GetComponent<Rigidbody>();	
+			rig = GetComponent<Rigidbody>();
+			ani = GetComponent<Animator>();
 		}
 
 		private void Update()
@@ -35,6 +39,7 @@ namespace Z1HY4N9
 			//GetJoystickValue();	
 			UpdateDirectionIconPos();
 			LookDirecrionIcon();
+			UpdateAnimation();
 		}
 
 		private void FixedUpdate()
@@ -42,13 +47,13 @@ namespace Z1HY4N9
 			Move();
 		}
 
-		//取得虛擬搖桿值並吐出至Console
+		// 取得虛擬搖桿值並吐出至Console
 		private void GetJoystickValue()
 		{
 			print("<color=yellow>水平 : " + joystick.Horizontal + "</color>");
 		}
 
-		//移動功能
+		// 移動功能
 		private void Move()
 		{
 			// 剛體.加速度 = 三維向量(X.Y.Z)
@@ -56,7 +61,7 @@ namespace Z1HY4N9
 		}	
 
 
-		//更新角色方向圖示的座標
+		// 更新角色方向圖示的座標
 		private void UpdateDirectionIconPos()
         {
 			// 新座標 = 角色的座標 + 三維向量(虛擬搖桿的水平與垂直) * 方向圖示的範圍
@@ -65,6 +70,7 @@ namespace Z1HY4N9
 			traDirectionIcon.position = pos;
         }
 
+		// 角色面向方向
 		private void LookDirecrionIcon()
         {
 			// 取得面向角度 = 四位元.面向角度(方向圖示 - 角色) - 方向圖示與角色的向量
@@ -76,5 +82,12 @@ namespace Z1HY4N9
 		
 		}
 
+		// 更新動畫
+		private void UpdateAnimation()
+        {
+			// 是否跑步 = 虛擬搖桿.水平 不為零 或 垂直 不為零
+			bool run = joystick.Horizontal != 0 || joystick.Vertical != 0;
+			ani.SetBool(parameterwalk, run);
+        }
 	}
 }
