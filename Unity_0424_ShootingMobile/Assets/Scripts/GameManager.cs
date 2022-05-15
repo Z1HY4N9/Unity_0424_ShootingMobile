@@ -31,15 +31,15 @@ namespace Z1HY4N9
 			
 			
 			// 如果是連線進入的玩家就在伺服器生成角色物件
-			if (photonView.IsMine)
-			{
+			//if (photonView.IsMine)
+			//{
 				int indexRadom = Random.Range(0, traSpawnPointList.Count);   // 取得隨機清單(0,清單的長度)
 				Transform tra = traSpawnPointList[indexRadom];               // 取得隨機座標
 				// 透過Photon伺服器.生成(物件, 座標, 角度)
 				PhotonNetwork.Instantiate(goCharacter.name, tra.position, tra.rotation);
 
 				traSpawnPointList.RemoveAt(indexRadom);  // 刪除已經取得過的生成座標資料
-			}
+			//}
 
 		}
 
