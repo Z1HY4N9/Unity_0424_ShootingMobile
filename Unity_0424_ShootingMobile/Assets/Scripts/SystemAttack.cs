@@ -1,12 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 namespace Z1HY4N9
 {
     /// <summary>
     /// 攻擊系統
     /// </summary>
-    public class SystemAttack : MonoBehaviour
+    public class SystemAttack : MonoBehaviourPun
     {
         [HideInInspector]
         public Button btnFire;
@@ -24,17 +25,29 @@ namespace Z1HY4N9
 
         private void Awake()
         {
-            // 發射按鈕.點擊.添加監聽器(開槍方法) - 按下發射按鈕執行開槍方法
-            btnFire.onClick.AddListener(Fire);
+            // 如果是 本身的玩家物件 就執行發射
+            if (photonView.IsMine)
+            {
+                // 發射按鈕.點擊.添加監聽器(開槍方法) - 按下發射按鈕執行開槍方法
+                btnFire.onClick.AddListener(Fire);
+
+            }
+            
+            
+           
         }
 
 
         //開槍
         private void Fire()
         {
-            // 生成(物件,座標,角度)
-            Instantiate(goBullet, traFire.position, Quaternion.identity);
+            // 暫存子彈 = 連線.生成(物件,座標,角度)
+            GameObject tempBullet =  PhotonNetwork.Instantiate(goBullet.name, traFire.position, Quaternion.identity);
+            //
+            tempBullet.GetComponent<Rigidbody>().AddForce(transform.forward * speedFire);
+        
         }
+
 
     }
 }

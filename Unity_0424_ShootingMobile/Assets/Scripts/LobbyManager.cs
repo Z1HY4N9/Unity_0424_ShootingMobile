@@ -25,6 +25,8 @@ namespace Z1HY4N9
 		private Button btnBattle;
 		[SerializeField, Header("連線人數")]
 		private Text textCountPlayer;
+		[SerializeField, Header("連線最大人數"), Range(2,20)]
+		private byte maxCountPlayer = 3;
 
 		// 喚醒事件 : 播放遊戲時執行一次，初始化設定
 		private void Awake()
@@ -85,7 +87,7 @@ namespace Z1HY4N9
 			print("<color=red>4.加入隨機房間失敗</color>");
 
 			RoomOptions ro = new RoomOptions();  // 新增房間設定物件
-			ro.MaxPlayers = 5;                   // 指定房間最大人數
+			ro.MaxPlayers = maxCountPlayer;                   // 指定房間最大人數
 			PhotonNetwork.CreateRoom("", ro);     // 建立房間並給予房間物件 ""內為房間名
 
 		}

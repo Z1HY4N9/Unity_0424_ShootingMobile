@@ -2247,6 +2247,7 @@ GameObject:
   - component: {fileID: -4384722996903479155}
   - component: {fileID: -9064097179012602428}
   - component: {fileID: -1133892574595686702}
+  - component: {fileID: 6921069390482830909}
   m_Layer: 0
   m_Name: "\u6230\u58EB"
   m_TagString: Untagged
@@ -2384,6 +2385,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: -4384722996903479155}
   - {fileID: -9064097179012602428}
+  - {fileID: -1133892574595686702}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -2443,6 +2445,21 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &6921069390482830909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4008936628470016867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b13e6a50a9930e43a6ceee79ddeb133, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 200
+  goVFXHit: {fileID: 8742171320930090845, guid: 8b178017baf59874c951bb397bca0bfc, type: 3}
+  imgHp: {fileID: 0}
 --- !u!1 &4008936628470016869
 GameObject:
   m_ObjectHideFlags: 0
