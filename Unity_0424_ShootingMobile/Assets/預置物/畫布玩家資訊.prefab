@@ -335,6 +335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   v3Offset: {x: 0, y: 7, z: 0}
+  traPlayer: {fileID: 0}
 --- !u!1 &1706001482315734295
 GameObject:
   m_ObjectHideFlags: 0

@@ -25,6 +25,7 @@ namespace Z1HY4N9
             Follow();
         }
 
+
         private void Follow()
         {
             transform.position = traPlayer.position + v3Offset;

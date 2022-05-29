@@ -2324,10 +2324,10 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: 0c05490b9fe2cf344abcadd51755d785, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 3.06
+  m_Radius: 0.95
+  m_Height: 3.39
   m_Direction: 1
-  m_Center: {x: 0, y: 1.52, z: 0}
+  m_Center: {x: 0, y: 1.55, z: 0}
 --- !u!114 &4008936628973787827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2460,6 +2460,7 @@ MonoBehaviour:
   hp: 200
   goVFXHit: {fileID: 8742171320930090845, guid: 8b178017baf59874c951bb397bca0bfc, type: 3}
   imgHp: {fileID: 0}
+  textHp: {fileID: 0}
 --- !u!1 &4008936628470016869
 GameObject:
   m_ObjectHideFlags: 0

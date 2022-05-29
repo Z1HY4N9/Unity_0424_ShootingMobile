@@ -1,5 +1,6 @@
 using Cinemachine;
 using Photon.Pun;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -36,12 +37,17 @@ namespace Z1HY4N9
 		private Transform traDirectionIcon;
 		private CinemachineVirtualCamera cvc;
 		private SystemAttack systemAttack;
+		private DamageManager damageManager;
+		
 
 		private void Awake()
 		{
 			rig = GetComponent<Rigidbody>();
 			ani = GetComponent<Animator>();
 			systemAttack = GetComponent<SystemAttack>();
+			damageManager = GetComponent<DamageManager>();
+
+			
 
 			// 如果是連線進入的玩家 就生成玩家需要的物件
 			if (photonView.IsMine)
@@ -59,6 +65,9 @@ namespace Z1HY4N9
 				cvc = GameObject.Find("CM管理器").GetComponent<CinemachineVirtualCamera>();
 				// 指定追蹤物件
 				cvc.Follow = transform;
+
+				damageManager.imgHp = GameObject.Find("圖片血量").GetComponent<Image>();
+				damageManager.textHp = GameObject.Find("文字血量").GetComponent<TextMeshProUGUI>();
 			}
 			// 否則 不是連線進入的玩家 就關閉控制系統，避免控制到多個物件
 			else
@@ -87,15 +96,19 @@ namespace Z1HY4N9
 			print("<color=yellow>水平 : " + joystick.Horizontal + "</color>");
 		}
 
-		// 移動功能
+		/// <summary>
+		/// 移動功能
+		/// </summary>
 		private void Move()
 		{
 			// 剛體.加速度 = 三維向量(X.Y.Z)
 			rig.velocity = new Vector3(joystick.Horizontal, 0, joystick.Vertical) * speed;
-		}	
+		}
 
 
-		// 更新角色方向圖示的座標
+		/// <summary>
+		/// 更新角色方向圖示的座標
+		/// </summary>
 		private void UpdateDirectionIconPos()
         {
 			// 新座標 = 角色的座標 + 三維向量(虛擬搖桿的水平與垂直) * 方向圖示的範圍
@@ -104,7 +117,9 @@ namespace Z1HY4N9
 			traDirectionIcon.position = pos;
         }
 
-		// 角色面向方向
+		/// <summary>
+		/// 角色面向方向
+		/// </summary>
 		private void LookDirecrionIcon()
         {
 			// 取得面向角度 = 四位元.面向角度(方向圖示 - 角色) - 方向圖示與角色的向量
@@ -116,7 +131,9 @@ namespace Z1HY4N9
 		
 		}
 
-		// 更新動畫
+		/// <summary>
+		/// 更新動畫
+		/// </summary>
 		private void UpdateAnimation()
         {
 			// 是否跑步 = 虛擬搖桿.水平 不為零 或 垂直 不為零
