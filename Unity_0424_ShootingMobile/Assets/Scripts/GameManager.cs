@@ -2,6 +2,7 @@ using UnityEngine;
 using Photon.Pun;
 using System.Collections.Generic;   // 引用 系統查詢語言 (資料結構轉換 API)
 using System.Linq;                  // 引用 系統集合一般 (資料結構，List, ArrayList...)
+using Photon.Realtime;
 
 namespace Z1HY4N9 
 {
@@ -11,7 +12,7 @@ namespace Z1HY4N9
 	/// 就生成角色物件(戰士)
 	/// </summary>
 
-	public class GameManager : MonoBehaviourPun
+	public class GameManager : MonoBehaviourPunCallbacks
 	{
 		[SerializeField, Header("角色物件")]
 		private GameObject goCharacter;
@@ -26,6 +27,12 @@ namespace Z1HY4N9
 
 		private void Awake()
 		{
+			// 玩家已經加入房間執行...
+
+			// Photon 連線.當前房間.可視性 = 否 (其他玩家看不到此房間，不能加入)
+			PhotonNetwork.CurrentRoom.IsVisible = false;
+
+			#region 隨機生成
 			traSpawnPointList = new List<Transform>();   // 新增 清單物件
 			traSpawnPointList = traSpawnPoint.ToList();  // 陣列轉為清單資料結構
 			
@@ -39,10 +46,25 @@ namespace Z1HY4N9
 				PhotonNetwork.Instantiate(goCharacter.name, tra.position, tra.rotation);
 
 				traSpawnPointList.RemoveAt(indexRadom);  // 刪除已經取得過的生成座標資料
-			//}
+														 //}
+			#endregion
 
 		}
 
+		// 有玩家離開房間會執行一次
+		public override void OnPlayerLeftRoom(Player otherPlayer)
+		{
+			base.OnPlayerLeftRoom(otherPlayer);
+
+			// 如果 當前房間玩家人數 剩下一人 就吃雞
+			if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
+				Win();
+		}
+
+		private void Win() 
+		{
+			print("勝利");
+		}
 
 	}
 }
