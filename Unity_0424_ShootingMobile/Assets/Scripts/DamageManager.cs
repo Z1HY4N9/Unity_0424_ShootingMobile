@@ -82,6 +82,10 @@ namespace Z1HY4N9
             
         }
 
+        /// <summary>
+        /// 受傷功能
+        /// </summary>
+        /// <param name="posHit">受傷碰撞的座標</param>
         private void Damage(Vector3 posHit)
         {
             hp -= 20;
@@ -109,7 +113,7 @@ namespace Z1HY4N9
             systemAttack.enabled = false;
             systemControl.traDirectionIcon.gameObject.SetActive(false);
             
-            float valueDidsolve = 5;                                   // 溶解數值起始值
+            float valueDidsolve = 10;                                   // 溶解數值起始值
              
             for (int i = 0; i < 20; i++)                               // 迴圈執行遞減           
             {
